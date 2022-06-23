@@ -1,0 +1,42 @@
+<h1>User info</h1>
+<div>
+  <%= @user.name %>
+  <%= image_tag @user.get_image %>
+  <p><%= link_to "user編集", edit_user_path(current_user)%></p>
+</div>
+
+<h1>New Book</h1>
+<%= form_with model: @book do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+<% end %>
+
+
+
+<h1>Books</h1>
+
+<table>
+  <tr>
+    <th>Title</th> <th>Opinion</th><th colspan="2"></th>
+  </tr>
+ <% @books.each do |book| %>
+  <tr>
+    <td>
+    <%= link_to book_path(book.id) do %>
+    <%= book.title %> 
+    <% end %>
+    </td>
+    <td><%= book.body %></td>
+　　<% if book.user == current_user %>
+      <td><%= link_to "Edit",edit_book_path(current_user) %></td>
+      <td><%= link_to "Destroy",book_path(book),method: :delete  %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
+  </tr>
+<% end %> 
+</table>

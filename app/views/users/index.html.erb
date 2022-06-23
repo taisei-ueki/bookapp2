@@ -1,0 +1,17 @@
+
+<p><%= link_to "user編集", edit_user_path(current_user)%></p>
+<h2>User info</h2>
+<div>
+  <%= @user.name %>
+  <%= image_tag @user.get_image %>
+</div>
+
+
+<h2>Users</h2>
+<% @users.each do |user| %>
+<div>
+  <%= image_tag user.get_image %>
+  <p>name:<%= user.name %></p>
+ 
+</div>
+<% end %>
